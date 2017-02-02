@@ -1,0 +1,39 @@
+<h1 class="title">Good Burger</h1>
+
+<h3>What burger would you like to have?</h3>
+
+<div class="contentcontainer">
+	<div class="content">
+		<h4>We also have vegan option..meatless burger, but why would you want that?</h4>
+		{{#each burgers}}
+		{{#unless this.devoured}}
+	  	<div class="burgertitle">
+	  	   <p>{{this.id}}: {{this.burger_name}}</p>
+	  	</div>
+	  	<div class="burgerbutton">
+	  	   <!-- Form to delete the burger. The post will send the burger's id to the server -->
+			<form action="/delete/{{this.id}}" method="POST">
+				<input type="hidden" name="id" value="{{this.id}}">
+				<button type="submit">Devour</button>
+			</form>
+	  	</div>
+	  	{{/unless}}
+		{{/each}}
+	</div>
+	<div class="content">
+		<h4>Bob's Burgers</h4>
+		{{#each burgers}}
+		{{#if this.devoured}}
+		<div>
+			<p>{{this.id}}: {{this.burger_name}}</p>
+		</div>
+		{{/if}}
+		{{/each}}	
+	</div>
+</div>
+<div class="entry">
+	<form action="/" method="POST">
+		<textarea type="text" name="burger" id="burgerorder"></textarea><br>
+		<button type="submit">Order</button>
+	</form>
+</div>
